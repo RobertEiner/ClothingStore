@@ -55,15 +55,25 @@ public class MainMenu {
                 MainMenu();
                 break;
             case 1:
-                String ID = input.readString("Enter item ID: ");
+                String itemID1 = input.readString("Enter item ID: ");
                 String name = input.readString("Enter item name: ");
                 double price = input.readInt("Enter item price: ");
-                System.out.println(facade.createItem(ID, name, price));
+                System.out.println(facade.createItem(itemID1, name, price));
+                break;
+            case 4:
+                String itemID2 = input.readString("Enter item ID for the item you wish to buy:");
+                int amount = input.readInt("Enter the amount of items you wish to buy:");
+                double priceForBoughtItems = facade.buyItem(itemID2, amount);
+                if(priceForBoughtItems == -1) {
+                    System.out.println(priceForBoughtItems);
+                } else {
+                    System.out.println("The total price for your purchased items is " + priceForBoughtItems);
+                }
                 break;
             case 5:
-                String itemID = input.readString("Enter ID for item you wish to rename:");
+                String itemID3 = input.readString("Enter ID for item you wish to rename:");
                 String newName = input.readString("Enter the new name for the item:");
-                System.out.println(facade.updateItemName(itemID, newName));
+                System.out.println(facade.updateItemName(itemID3, newName));
         }
     }
 
