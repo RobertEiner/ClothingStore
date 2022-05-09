@@ -1,7 +1,12 @@
 package facade;
 
+import BusinessLogic.Item;
+import org.w3c.dom.ls.LSOutput;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+
 
 public class Facade {
 
@@ -9,13 +14,23 @@ public class Facade {
     // You must fill in this class with your own code. You can (and should) create more classes
     // that implement the functionalities listed in the Facade and in the Test Cases.
 
+    private ArrayList<Item> listOfItems;
+
     public Facade(){
+        this.listOfItems = new ArrayList<>();
 
     }
 
     public String createItem(String itemID, String itemName, double unitPrice){
-        return "";
+        if(itemID.isEmpty() || this.containsItem(itemID) || itemName.isEmpty() ||  unitPrice <= 0) {
+            return "Invalid data for item.";
+        } else {
+            Item newItem = new Item(itemID, itemName, unitPrice);
+            listOfItems.add(newItem);
+            return  "Item " + itemID + " was registered successfully";
+        }
     }
+
 
     public String printItem(String itemID) {
         return "";
@@ -26,7 +41,13 @@ public class Facade {
     }
 
     public boolean containsItem(String itemID) {
-        return false;
+        boolean exists = false;
+        for(Item item : listOfItems) {
+            if(item.getItemID().equals(itemID)) {
+                exists = true;
+            }
+        }
+        return exists;
     }
 
     public double buyItem(String itemID, int amount) {
@@ -130,7 +151,17 @@ public class Facade {
     }
 
     public String updateItemName(String itemID, String newName) {
-        return "";
+        if(itemID.isEmpty() || newName.isEmpty()){
+            return "Invalid data for item.";
+        } else if(this.containsItem(itemID)) {
+            for(Item item : listOfItems) {
+                if(itemID.equals(item.getItemID())) {
+                    item.setItemName(newName);
+                }
+            } return "Item " + itemID + " successfully had its name updated to: " + newName;
+        } else {
+            return "Item " + itemID + " was not registered yet";
+        }
     }
 
     public String updateItemPrice(String itemID, double newPrice) {
