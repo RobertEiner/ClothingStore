@@ -24,4 +24,8 @@ public class Item {
         this.unitPrice = newUnitPrice;
     }
 
+    public double getUnitPrice() {
+        return this.unitPrice;
+    }
+
 }

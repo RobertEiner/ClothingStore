@@ -51,9 +51,21 @@ public class Facade {
     }
 
     public double buyItem(String itemID, int amount) {
-        return -10.0;
+        double price = 0;
+        if (this.containsItem(itemID)) {
+            for (Item item : listOfItems) {
+                if (item.getItemID().equals(itemID)) {
+                    if (amount <= 4) {
+                        price = item.getUnitPrice() * amount;
+                    } else {
+                        price = item.getUnitPrice() * 4 + ((amount - 4) * item.getUnitPrice() * 0.7);
+                    }
+                }
+            } return price;
+        } else {
+            return -1;
+        }
     }
-
     public String reviewItem(String itemID, String reviewComment, int reviewGrade) {
         return "";
     }
