@@ -57,8 +57,15 @@ public class MainMenu {
             case 1:
                 String itemID1 = input.readString("Enter item ID: ");
                 String name = input.readString("Enter item name: ");
-                double price = input.readInt("Enter item price: ");
+                double price = input.readDouble("Enter item price: ");
                 System.out.println(facade.createItem(itemID1, name, price));
+                break;
+            case 2:
+                String itemToRemove = input.readString("Enter item ID for the item you wish to remove:");
+                System.out.println(facade.removeItem(itemToRemove));
+                break;
+            case 3:
+                System.out.println(facade.printAllItems());
                 break;
             case 4:
                 String itemID2 = input.readString("Enter item ID for the item you wish to buy:");

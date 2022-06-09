@@ -1,9 +1,9 @@
 package facade;
 
+import java.lang.Math;
 import BusinessLogic.Item;
-import org.w3c.dom.ls.LSOutput;
-
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -15,6 +15,7 @@ public class Facade {
     // that implement the functionalities listed in the Facade and in the Test Cases.
 
     private ArrayList<Item> listOfItems;
+    private String EOL = System.lineSeparator();
 
     public Facade(){
         this.listOfItems = new ArrayList<>();
@@ -27,17 +28,38 @@ public class Facade {
         } else {
             Item newItem = new Item(itemID, itemName, unitPrice);
             listOfItems.add(newItem);
-            return  "Item " + itemID + " was registered successfully";
+            return  "Item " + itemID + " was registered successfully.";
         }
     }
 
-
     public String printItem(String itemID) {
-        return "";
+        String message = "";
+        if(this.containsItem(itemID)) {
+            for (Item item : listOfItems) {
+                if(item.getItemID().equals(itemID)) {
+                    message = item.toString();
+                }
+            }
+        } else {
+            message = "Item " + itemID + " was not registered yet.";
+        }
+        return message;
     }
 
     public String removeItem(String itemID) {
-        return "";
+        String message = "";
+        if(this.containsItem(itemID)) {
+            //            for(Item item : listOfItems) {
+            //                if(item.getItemID().equals(itemID)) {
+            //                    listOfItems.remove(item);
+            //
+            //                    message = "Item " + itemID + " was successfully removed";
+            //                }
+            listOfItems.removeIf(item -> item.getItemID().equals(itemID));
+            message = "Item " + itemID + " was successfully removed.";
+        } else {
+            message = "Item " + itemID + " could not be removed.";
+        } return message;
     }
 
     public boolean containsItem(String itemID) {
@@ -66,6 +88,7 @@ public class Facade {
             return -1;
         }
     }
+
     public String reviewItem(String itemID, String reviewComment, int reviewGrade) {
         return "";
     }
@@ -163,25 +186,50 @@ public class Facade {
     }
 
     public String updateItemName(String itemID, String newName) {
-        if(itemID.isEmpty() || newName.isEmpty()){
-            return "Invalid data for item.";
+        String message = "";
+        if(!this.containsItem(itemID)) {
+            message = "Item " + itemID + " was not registered yet.";
+        } else if(itemID.isEmpty() || newName.isEmpty()){
+            message = "Invalid data for item.";
         } else if(this.containsItem(itemID)) {
             for(Item item : listOfItems) {
                 if(itemID.equals(item.getItemID())) {
                     item.setItemName(newName);
                 }
-            } return "Item " + itemID + " successfully had its name updated to: " + newName;
-        } else {
-            return "Item " + itemID + " was not registered yet";
+            } message = "Item " + itemID + " was updated successfully.";
         }
+        return message;
     }
 
     public String updateItemPrice(String itemID, double newPrice) {
-        return "";
+        String message = "";
+
+        if(!this.containsItem(itemID)) {
+            message = "Item " + itemID + " was not registered yet.";
+        } else if(itemID.isEmpty() || newPrice <= 0) {
+            message = "Invalid data for item.";
+        }
+        else {
+            for(Item item : listOfItems) {
+                if(item.getItemID().equals(itemID)) {
+                    item.setUnitPrice(newPrice);
+                    message = "Item " + itemID + " was updated successfully.";
+                }
+            }
+        }
+        return message;
     }
 
     public String printAllItems() {
-        return "";
+        String message = "";
+        if(listOfItems.isEmpty()) {
+            message = "No items registered yet.";
+        } else {
+            for(Item item : listOfItems) {
+                message += item.toString() + EOL;
+            } message = "All registered items:" + EOL + message;
+        }
+        return message;
     }
 
     public String printMostProfitableItems() {

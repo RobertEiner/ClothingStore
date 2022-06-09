@@ -14,6 +14,14 @@ public class Input {
         return answer;
     }
 
+    public double readDouble (String message) {
+        System.out.println(message);
+        double answer = scanner.nextDouble();
+        scanner.nextLine();
+
+        return answer;
+    }
+
     public String readString(String message) {
         System.out.println(message);
         String answer = scanner.nextLine();
