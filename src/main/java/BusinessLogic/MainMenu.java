@@ -3,6 +3,8 @@ package BusinessLogic;
 import Util.Input;
 import facade.Facade;
 
+import java.sql.SQLOutput;
+
 public class MainMenu {
 
     private String EOL = System.lineSeparator();
@@ -81,6 +83,11 @@ public class MainMenu {
                 String itemID3 = input.readString("Enter ID for item you wish to rename:");
                 String newName = input.readString("Enter the new name for the item:");
                 System.out.println(facade.updateItemName(itemID3, newName));
+                break;
+            case 6:
+                String itemID4 = input.readString("Enter ID for item you wish to rename:");
+                double newPrice = input.readDouble("Enter the new price for the item:");
+                System.out.println(facade.updateItemPrice(itemID4, newPrice));
         }
     }
 
@@ -99,6 +106,53 @@ public class MainMenu {
                 "9. Print item(s) with best mean review grade." + EOL +
                 "10. Print item(s) with worst mean review grade." + EOL);
         answer = input.readInt("Type an option number: ");
+
+        switch (answer) {
+
+            case 0:
+                MainMenu();
+                break;
+            case 1:
+                String itemID5 = input.readString("Enter the item ID for the item you wish to review:");
+                int reviewGrade = input.readInt("Enter a grade between 1-5:");
+                String reviewComment = input.readString("Enter a review comment if you wish:");
+                facade.reviewItem(itemID5, reviewComment, reviewGrade);
+                break;
+            case 2:
+                String itemID6 = input.readString("Enter the item ID to retrieve a specific review for this item:");
+                int reviewindex = input.readInt("Enter the review's review number:");
+                System.out.println(facade.getPrintedItemReview(itemID6, reviewindex));
+                break;
+            case 3:
+                String itemID7 = input.readString("Enter the item ID to print all reviews for the item:");
+                System.out.println(facade.getPrintedReviews(itemID7));
+                break;
+            case 4:
+                String itemID8 = input.readString("Enter the item ID to get the mean grade for the item:");
+                System.out.println(facade.getItemMeanGrade(itemID8));
+                break;
+            case 5:
+                String itemID9 = input.readString("Enter the item ID to print all comments for the item:");
+                System.out.println(facade.getItemCommentsPrinted(itemID9));
+                break;
+            case 6:
+                System.out.println(facade.printAllReviews());
+                break;
+            case 7:
+                System.out.println(facade.printMostReviewedItems());
+                break;
+            case 8:
+                System.out.println(facade.printLeastReviewedItems());
+                break;
+            case 9:
+                System.out.println(facade.printBestReviewedItems());
+                break;
+            case 10:
+                System.out.println(facade.printWorseReviewedItems());
+                break;
+
+        }
+
     }
 
     public void transactionsHistoryOptions() {
@@ -114,6 +168,34 @@ public class MainMenu {
                 "7. Print all transactions of a specific item." + EOL +
                 "8. Print item with highest profit." + EOL);
         answer = input.readInt("Type an option number: ");
+
+
+        switch(answer) {
+            case 0:
+                MainMenu();
+                break;
+            case 1:
+                break;
+            case 2:
+                break;
+            case 3:
+                break;
+            case 4:
+                break;
+            case 5:
+                break;
+            case 6:
+                break;
+            case 7:
+                break;
+            case 8:
+                break;
+
+
+        }
+
+
+
     }
 
 

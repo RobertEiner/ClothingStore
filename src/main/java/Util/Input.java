@@ -24,8 +24,7 @@ public class Input {
 
     public String readString(String message) {
         System.out.println(message);
-        String answer = scanner.nextLine();
 
-        return answer;
+        return scanner.nextLine();
     }
 }
