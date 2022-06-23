@@ -3,6 +3,7 @@ package BusinessLogic;
 import Util.Truncate;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class Item {
 
@@ -96,6 +97,26 @@ public class Item {
         return meanGrade;
     }
 
+    @Override
+    public boolean equals(Object anotherObject) {
+        if(anotherObject == null) {
+            return false;
+        } else if (this == anotherObject) {
+            return true;
+        } else if (anotherObject instanceof Item) {
+            Item anotherItem = (Item) anotherObject;
+            return (this.itemID.equals(anotherItem.getItemID()) &&
+                    this.itemName.equals(anotherItem.getItemName()) &&
+                    this.unitPrice == anotherItem.getUnitPrice());
+        } else {
+            return false;
+        }
 
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(this.itemID,this.itemName, this.unitPrice);
+    }
 
 }

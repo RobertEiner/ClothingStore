@@ -19,7 +19,8 @@ public class MainMenu {
                     "0. Close system. " + EOL +
                     "1. Open Item Options. " + EOL +
                     "2. Open Review options. " + EOL +
-                    "3. Open Transaction History options. " + EOL
+                    "3. Open Transaction History options. " + EOL +
+                    "4. Open Employee options" + EOL
             );
             answer = input.readInt("Type an option number: ");
 
@@ -35,6 +36,8 @@ public class MainMenu {
                 case 3:
                     transactionsHistoryOptions();
                     break;
+                case 4:
+                    employeeOptions();
             }
         } while (answer != 0);
 
@@ -49,7 +52,9 @@ public class MainMenu {
                 "3. Print all registered Items." + EOL +
                 "4. Buy an Item." + EOL +
                 "5. Update an item's name." + EOL +
-                "6. Update an item's price.");
+                "6. Update an item's price." + EOL +
+                "7. Print a specific item." + EOL);
+
         answer = input.readInt("Type an option number: ");
 
         switch(answer) {
@@ -175,30 +180,146 @@ public class MainMenu {
                 MainMenu();
                 break;
             case 1:
+                System.out.println(facade.getTotalProfit());
                 break;
             case 2:
+                System.out.println(facade.getTotalUnitsSold());
                 break;
             case 3:
+                System.out.println(facade.getTotalTransactions());
                 break;
             case 4:
+                System.out.println(facade.printAllTransactions());
                 break;
             case 5:
+                String itemID10 = input.readString("Enter Item ID to see total profit of item:");
+                System.out.println(facade.getProfit(itemID10));
                 break;
             case 6:
+                String itemID11 = input.readString("Enter item ID to see the number of units sold for the item:");
+                System.out.println(facade.getUnitsSolds(itemID11));
                 break;
             case 7:
+                 String itemID12 = input.readString("Enter item ID to see the transactions for the item:");
+                 System.out.println(facade.printItemTransactions(itemID12));
                 break;
             case 8:
+                System.out.println(facade.printMostProfitableItems());
                 break;
 
 
         }
 
+    }
 
+    public void employeeOptions() {
+
+        System.out.println("Employee options menu:" + EOL +
+                "0. Return to Main Menu." + EOL +
+                "1. Create an Employee (Regular Employee)."+ EOL +
+                "2. Create an employee (Manager)." + EOL +
+                "3. Create an employee (Director)." + EOL +
+                "4. Create an employee (Intern)." + EOL +
+                "5. Remove an employee." + EOL +
+                "6. Print specific employee" + EOL +
+                "7. Print all registered employees." + EOL +
+                "8. Print the total expense with net salary" + EOL +
+                "9. print all employees sorted by gross salary." + EOL);
+
+                int answer = input.readInt("Type an option number:");
+
+        switch(answer) {
+
+            case 0:
+                MainMenu();
+                break;
+            case 1:
+                String employeeID = input.readString("Enter ID for the employee:");
+                String employeeName = input.readString("Enter the name of the employee:");
+                double employeeGrossSalary = input.readDouble("Enter the gross salary for the employee:");
+                try {
+                    System.out.println(facade.createEmployee(employeeID, employeeName, employeeGrossSalary));
+                } catch (Exception exception) {
+                    System.out.println(exception.getMessage());
+                }
+                break;
+            case 2:
+                String managerID = input.readString("Enter ID for the manager:");
+                String managerName = input.readString("Enter the name of the manager:");
+                double managerGrossSalary = input.readDouble("Enter the gross salary of the manager:");
+                String managerDegree = input.readString("Enter the degree of the manager:");
+                try {
+                    System.out.println(facade.createEmployee(managerID, managerName, managerGrossSalary, managerDegree));
+                } catch (Exception exception) {
+                    System.out.println(exception.getMessage());
+                }
+                break;
+            case 3:
+                String directorID = input.readString("Enter ID for the director:");
+                String directorName = input.readString("Enter the name of the director:");
+                double directorGrossSalary = input.readDouble("Enter the gross salary of the director:");
+                String directorDegree = input.readString("Enter the degree of the director:");
+                String department = input.readString("Enter the department of the director:");
+                try {
+                    System.out.println(facade.createEmployee(directorID, directorName, directorGrossSalary, directorDegree, department));
+                } catch (Exception exception) {
+                    System.out.println(exception.getMessage());
+                }
+                break;
+            case 4:
+                String internID = input.readString("Enter ID for the intern:");
+                String internName = input.readString("Enter the name of the intern:");
+                double internGrossSalary = input.readDouble("Enter the gross salary of the intern:");
+                int Gpa = input.readInt("Enter the gpa of the intern:");
+                try {
+                    System.out.println(facade.createEmployee(internID, internName, internGrossSalary, Gpa));
+                } catch (Exception exception) {
+                    System.out.println(exception.getMessage());
+                }
+                break;
+            case 5:
+                String employeeToRemove = input.readString("Enter the ID of the employee you wish to remove:");
+                try {
+                    System.out.println(facade.removeEmployee(employeeToRemove));
+                } catch (Exception exception) {
+                    System.out.println(exception.getMessage());
+                }
+                break;
+            case 6:
+                String employeeIDPrint = input.readString("Enter the ID of the employee to print:");
+                try {
+                    System.out.println(facade.printEmployee(employeeIDPrint));
+                } catch (Exception exception) {
+                    System.out.println(exception.getMessage());
+                }
+            case 7:
+                try {
+                    System.out.println(facade.printAllEmployees());
+                } catch (Exception exception) {
+                    System.out.println(exception.getMessage());
+                }
+                break;
+            case 8:
+                try {
+                    System.out.println(facade.getTotalNetSalary());
+                } catch (Exception exception) {
+                    System.out.println(exception.getMessage());
+                }
+                break;
+            case 9:
+                try {
+                    System.out.println(facade.printSortedEmployees());
+                } catch (Exception exception) {
+                    System.out.println(exception.getMessage());
+                }
+                break;
+        }
 
     }
 
-
-
-
 }
+
+
+
+
+

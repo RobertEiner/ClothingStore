@@ -2,6 +2,8 @@ package BusinessLogic;
 
 import Util.Truncate;
 
+import java.util.Objects;
+
 public class Transaction {
 
     private String itemID;
@@ -18,6 +20,27 @@ public class Transaction {
     @Override
     public String toString() {
         return this.itemID + ": " + this.amount + " item(s). " + String.format("%.2f", totalPrice) + " SEK";
+    }
+
+    @Override
+    public boolean equals(Object anotherObject) {
+        if(anotherObject == null) {
+            return true;
+        } else if(this == anotherObject) {
+            return true;
+        } else if(anotherObject instanceof Transaction) {
+            Transaction anotherTransaction = (Transaction) anotherObject;
+            return (this.itemID.equals(anotherTransaction.getItemID())) &&
+                    this.amount == anotherTransaction.getAmount() &&
+                    this.totalPrice == anotherTransaction.getTotalPrice();
+        } else {
+            return false;
+        }
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(this.itemID, this.amount, this.totalPrice);
     }
 
     public String getItemID() {
