@@ -9,3 +9,6 @@ The purpose of the system is to help a store owner manage their business. A user
 * Create, update and delete clothing items.
 * Write and read reviews for clothing items.
 * Add employees of different types, e.g. regular employees, managers and interns.
+* Manage transactions of different items
+
+The facade design pattern is implemented in this system.
